@@ -1,0 +1,17 @@
+{
+  "name": "@moltiful/js",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "echo \"no-build\"",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "format": "prettier -w .",
+    "typecheck": "echo \"no-typecheck\""
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "vitest": "^2.0.0"
+  }
+}
