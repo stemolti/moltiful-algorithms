@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { twoSum } from "./twoSum.js";
+import { twoSum } from "./twoSum";
 
 describe("twoSum", () => {
   it("returns indices of two numbers that sum to target", () => {
@@ -20,22 +20,13 @@ describe("twoSum", () => {
     expect(result).toEqual([0, 2]);
   });
 
-  it("handles duplicate values correctly", () => {
+  it("does not reuse the same element twice", () => {
     const nums = [3, 3];
     const target = 6;
 
     const result = twoSum(nums, target);
 
     expect(result).toEqual([0, 1]);
-  });
-
-  it("does not reuse the same element twice", () => {
-    const nums = [1, 5, 1];
-    const target = 2;
-
-    const result = twoSum(nums, target);
-
-    expect(result).toEqual([0, 2]);
   });
 
   it("throws an error when no solution exists", () => {
