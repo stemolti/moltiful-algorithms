@@ -3,11 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "echo \"no-build\"",
     "test": "vitest run",
     "lint": "eslint .",
-    "format": "prettier -w .",
-    "typecheck": "echo \"no-typecheck\""
+    "format": "prettier -w ."
   },
   "devDependencies": {
     "eslint": "^9.0.0",
