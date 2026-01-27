@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+
+jobs:
+  node:
+    name: Node (pnpm) — lint + ts typecheck + tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+
+      - name: Enable pnpm (Corepack)
+        run: |
+          corepack enable
+          corepack prepare pnpm@9.0.0 --activate
+          pnpm -v
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Matches your root script: "lint": "pnpm -r lint"
+      - name: Lint (JS + TS)
+        run: pnpm lint
+
+      # Run TS typecheck explicitly (safer than pnpm -r typecheck if JS has no typecheck script)
+      - name: Typecheck (TS)
+        run: pnpm --filter @moltiful/ts typecheck
+
+      # Matches your root script: "test": "pnpm -r test && pnpm py:test"
+      # Here we run only Node tests; Python is handled in the python job.
+      - name: Tests (JS + TS)
+        run: pnpm -r test
+
+  python:
+    name: Python — pytest
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python deps (dev)
+        working-directory: py
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      # Matches your root script: "py:test": "cd py && python -m pytest"
+      - name: Pytest
+        run: cd py && python -m pytest
