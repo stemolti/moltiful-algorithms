@@ -7,7 +7,7 @@ on:
 
 jobs:
   node:
-    name: Node (pnpm) — lint + ts typecheck + tests
+    name: Node (pnpm) - lint + ts typecheck + tests
     runs-on: ubuntu-latest
 
     steps:
@@ -49,7 +49,7 @@ jobs:
         run: pnpm -r test
 
   python:
-    name: Python — pytest
+    name: Python - pytest
     runs-on: ubuntu-latest
 
     steps:
