@@ -5,6 +5,8 @@
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm -r test && pnpm py:test",
+    "test:node": "pnpm -r test",
+    "test:py": "pnpm py:test",
     "lint": "pnpm -r lint",
     "format": "pnpm -r format",
     "typecheck": "pnpm -r typecheck",
